@@ -38,7 +38,7 @@ Chain-of-Thought | Photosynthesis| gemini-2.5-flash | 5 | 5 | 5 | 5 | N/A | More
 | Capability | Best Model(s) | Evidence Snippet | Notes |
 |------------|---------------|------------------|-------|
 | Explanatory Clarity | gemini-2.5-flash | To convert carbon dioxide (CO2) and water (H2O) into glucose (C6H12O6) and oxygen (O2), using light energy. | Easy to understand |
-| Chain-of-Thought | gemini-2.5-flash |  | Let's break it down step-by-step, from inputs to outputs. | Very detailed
+| Chain-of-Thought | gemini-2.5-flash | Let's break it down step-by-step, from inputs to outputs. | Very detailed
 | JSON Adherence | ?? | | |
 | Persona Control |  gemini-2.5-flash | Today, we're going to talk about one of the most fundamental, mind-blowingly awesome processes on Earth: **photosynthesis**  | Good use of natural language |
 | Instruction Strictness | All | | I don't feel that any model drifted from the original goal |
