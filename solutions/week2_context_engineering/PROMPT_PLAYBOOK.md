@@ -334,7 +334,7 @@ Failure Mode Tags: `no-hit`, `irrelevant`, `partial`, `verbose`, `leakage`, `sta
 ## Reflection Prompts
 - Where did additional context hurt answer quality? In do you ship to Canada question, the model used multiple ids (which I don't think are relevant, and responded incorrectly)
 - Which failure mode appeared most often? leakage
-- What is your next improvement priority & why?
+- What is your next improvement priority & why? Caching, to increase performance
 
 
 
