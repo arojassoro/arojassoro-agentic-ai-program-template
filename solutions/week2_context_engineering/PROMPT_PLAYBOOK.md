@@ -299,6 +299,38 @@ Sources: []
 |Can I pay with Bitcoin?|RAG|4|'faq5', 'faq3', 'faq6', 'faq4'|Included extra information about payments|N/A|N/A|recommended answer|
 |Can I pay with Bitcoin?|RAW|2|'faq5', 'faq3', 'faq6', 'faq4'|N/A|Hallucination, responded that bitcoin is accepted|leakage|not recommended|
 
+### Scoring (suggested 1–5 each)
+| Dimension | Definition | 1 | 5 |
+|-----------|------------|---|---|
+| Grounding | Uses factual retrieved content | Hallucinates | Fully cites sources |
+| Relevance | Stays on user ask | Tangential | Direct & focused |
+| Completeness | Covers key facts | Missing core | Fully addresses |
+| Brevity | Concise & purposeful | Verbose fluff | Tight answer |
+| Traceability | Clear which docs | Unclear | Explicit ids |
+
+Failure Mode Tags: `no-hit`, `irrelevant`, `partial`, `verbose`, `leakage`, `stale`.
+
+---
+##  Troubleshooting
+| Issue | Likely Cause | Fix |
+|-------|--------------|-----|
+| Empty retrieval | Index not built | Delete DB folder & re-run indexing |
+| Identical answers raw vs RAG | Context unused / too small | Increase k or improve delimiter clarity |
+| Slow indexing | Large FAQ or network | Reduce dataset size initially |
+| Repeated docs | Duplicate IDs | Ensure unique ids on add |
+| Stale answers after edit | Cached collection | Remove `chroma_db` directory |
+
+---
+## Stretch Goals (Depth)
+| Category | Idea | Hint |
+|----------|------|------|
+| Retrieval | Add simple max marginal relevance (MMR) | Penalize similarity to already selected docs |
+| Hybrid | Combine lexical filter (keyword) + vector | Pre-filter by keyword before vector search |
+| Chunking | Split longer text into overlaps | Use 300–500 char windows with 50 overlap |
+| Rerank | Score answer length or embed answer → refine | Secondary pass selecting top 1 |
+| Caching | Memoize embeddings for repeated queries | Dict keyed by text hash |
+| Eval | Add latency timing per query | `time.time()` delta |
+
 ## Reflection Prompts
 - Where did additional context hurt answer quality? In do you ship to Canada question, the model used multiple ids (which I don't think are relevant, and responded incorrectly)
 - Which failure mode appeared most often? leakage
