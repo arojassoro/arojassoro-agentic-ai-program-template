@@ -288,6 +288,7 @@ Sources: []
 ## Evaluation & Logging
 
 | Query | Mode (raw/RAG) | k | Retrieved IDs | Strengths | Weaknesses | Failure Modes | Notes |
+|-------|----------------|---|---------------|-----------|------------|---------------|-------|
 |How can I return a product?|RAG|1|'faq1'|Concise|Did not include extra information|N/A|Short answer|
 |How can I return a product?|RAG|4|'faq1', 'faq10', 'faq4', 'faq2'|Added information about email support, customer support, and information about replacements|N/A|N/A|Complete guide of returns|
 |How can I return a product?|RAW|2|N/A|N/A|Hallucination of the response, included return request form, and time to be processed|leakage|Not recommended|
