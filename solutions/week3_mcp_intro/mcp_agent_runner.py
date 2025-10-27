@@ -52,7 +52,7 @@ def build_answer_from_api(query: str, api_url: str = "http://127.0.0.1:8765/weat
             "tool": None
         }
 
-    city = match.group("city").strip()
+    city = match.group("city").strip().title()
     
     # Check if city is allowed
     if city not in ALLOWED_CITIES:
