@@ -133,8 +133,8 @@ Commit Message Guideline: `week3: add mcp weather tool baseline`
 - When did the tool invocation NOT improve answer quality? N/A
 - Which failure mode appeared first? Root cause? N/A
 - Next production hardening step you’d prioritize? 
- * Implement supported cities with translations.
- * Accept other queries like, Is San Jose sunny? or Is it going to rain in San Jose?
+ 1- Implement supported cities with translations.
+ 2- Accept other queries like, Is San Jose sunny? or Is it going to rain in San Jose?
 
 ---
 ## 12. Next Week Preview
