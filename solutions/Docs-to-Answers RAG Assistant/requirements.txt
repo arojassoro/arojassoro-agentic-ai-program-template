@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+chromadb
+agnos
+requests
+markdown
+inflect
+ollama
