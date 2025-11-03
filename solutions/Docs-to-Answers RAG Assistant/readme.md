@@ -1,6 +1,6 @@
 # Docs-to-Answers RAG Assistant for Hardware Store
 
-A mini Retrieval-Augmented Generation (RAG) assistant designed for a hardware. It answers frequently asked questions from markdown documents and generates budgets based on a CSV file of products and prices.
+A mini Retrieval-Augmented Generation (RAG) assistant designed for a hardware store. It answers frequently asked questions from markdown documents and generates budgets based on a CSV file of products and prices.
 
 ## Project Overview
 This assistant uses local LLMs and embeddings to:
