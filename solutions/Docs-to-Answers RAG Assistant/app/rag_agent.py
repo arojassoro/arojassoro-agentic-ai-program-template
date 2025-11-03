@@ -58,7 +58,37 @@ def ask(query: str) -> str:
                 lines.append(f"- {item}")
 
         return "\n".join(lines)
+
     else:
-        retrieved = retrieve_faq(query)
-        answer = generate_answer(retrieved, query)
-        return answer
+        products_db = load_products_csv("data/products.csv")
+        query_lower = query.lower()
+        query_clean = query_lower.translate(str.maketrans('', '', '?.!'))
+
+        # Check for keywords: sell, have, price
+        if any(keyword in query_clean for keyword in ["sell", "have", "price"]):
+            # Normalize query for matching
+            for product, details in products_db.items():
+                product_clean = product.lower()
+                singular_product = p.singular_noun(product_clean) or product_clean
+
+                if singular_product in query_clean:
+                    plural_name = p.plural(product)
+                    if "price" in query_clean:
+                        return f"Yes, we sell {plural_name}, the price is ${details['price']:.2f}."
+                    else:
+                        return f"Yes, we sell {plural_name}."
+
+            # No match found → respond negatively
+            match = re.search(r"(?:sell|have|price)\s+(.*)", query_clean)
+            if match:
+                requested_product = match.group(1).strip()
+                requested_product = requested_product.translate(str.maketrans('', '', '?.!'))
+                plural_requested = p.plural(requested_product)
+                return f"No, we do not sell {plural_requested}."
+
+            return "No, we do not sell that product."
+
+    # Fallback to FAQ + LLM only for non-product queries
+    retrieved = retrieve_faq(query)
+    return generate_answer(retrieved, query)
+

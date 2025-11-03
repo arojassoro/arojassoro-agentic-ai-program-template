@@ -35,8 +35,8 @@ from chromadb.config import Settings
 from chromadb.utils import embedding_functions
 import inflect
 
-CHUNK_SIZE = 300
-CHUNK_OVERLAP = 50
+CHUNK_SIZE = 500
+CHUNK_OVERLAP = 100
 
 # Initialize ChromaDB client
 client = chromadb.PersistentClient(path="./vector_store/chromadb")
@@ -83,10 +83,9 @@ def ingest_faq_documents(data_dir: str):
                 metadatas=[{"source": doc["source"], "chunk": i}],
                 ids=[f"{doc['source']}_chunk_{i}"]
             )
-    client.persist()
     print("FAQ ingestion complete.")
 
-def retrieve_faq(query: str, k: int = 5):
+def retrieve_faq(query: str, k: int = 10):
     results = collection.query(query_texts=[query], n_results=k)
     return results
 

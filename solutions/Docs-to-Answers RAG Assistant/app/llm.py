@@ -37,7 +37,11 @@ def generate_answer(context_chunks: list, question: str) -> str:
 
     prompt = f"""
 You are a helpful assistant for a hardware store. Use ONLY the provided context to answer the question.
+IMPORTANT: You must use the provided context. If the answer is found in the context, include the citation (source#chunk).
 If the answer is not in the context, say "I don't know based on the provided information."
+When requesting to sell a product that is not in the context say "We don't sell productname."
+When asked for a price of a product that is not in the context say "We don't sell productname."
+Do not assume the store have products that are not in the context.
 Include citations in the format (source#chunk) when using retrieved content.
 
 Context:
@@ -45,6 +49,8 @@ Context:
 
 Question:
 {question}
+
+IMPORTANT: If you use any information from the context, you MUST include the citation (source#chunk).
 """
     
     response = requests.post(
@@ -57,6 +63,11 @@ Question:
     )
 
     if response.status_code == 200:
-        return response.json()["message"]["content"]
+        response_text = response.json()["message"]["content"]
+        # Enforce citation
+        if "(source#" not in response_text.lower():
+            response_text = "I don't know based on the provided information."
+        return response_text
+
     else:
         return f"Error: {response.status_code} - {response.text}"
